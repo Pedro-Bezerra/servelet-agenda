@@ -23,4 +23,44 @@ h1 {
 	border-radius: 5px;
 	font-size: 1.2em;
 	font-weight: 700;
+	border: 0;
+	cursor: pointer;
 }
+
+.botao1 input[type=button]{
+	text-decoration: none;
+	color: white;
+	background-color:var(--blueish-color);
+	padding: 5px 10px 5px 10px;
+	border-radius: 5px;
+	font-size: 1.2em;
+	font-weight: 700;
+	border: 0;
+	cursor: pointer;
+}
+
+.caixa1 input[type=text] {
+	width: 320px;
+	padding: 5px;
+	margin-bottom: 10px;
+	border: 1px solid var(--blueish-color);
+	border-radius: 5px;
+}
+
+.caixa2 input[type=text]{
+	padding: 5px;
+	margin-bottom: 10px;
+	border: 1px solid var(--blueish-color);
+	border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
