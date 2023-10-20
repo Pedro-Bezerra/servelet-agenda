@@ -1,0 +1,26 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:ital,wght@0,400;0,700;1,400&family=Playpen+Sans:wght@400;700&display=swap');
+
+:root {
+	--blueish-color: #66BBFF;
+}
+
+body {
+	font-family: 'Playpen Sans', cursive;
+	font-size: 1em;
+	font-weight: 400;
+}
+
+h1 {
+	color:var(--blueish-color);	
+}
+
+.botao1 {
+	text-decoration: none;
+	color: white;
+	background-color:var(--blueish-color);
+	padding: 5px 10px 5px 10px;
+	border-radius: 5px;
+	font-size: 1.2em;
+	font-weight: 700;
+}
