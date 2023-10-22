@@ -112,5 +112,20 @@ public class DAO {
     }
   }
 
+  public boolean excluirContato(JavaBeans contato) {
+    String delete = "delete from contatos where idcon = ?";
+    try {
+      Connection con = conectar();
+      PreparedStatement pst = con.prepareStatement(delete);
+      pst.setInt(1, Integer.parseInt(contato.getIdcon()));
+      pst.executeUpdate();
+      con.close();
+      return true;
+    } catch (Exception e) {
+      System.out.println(e);
+      return false;
+    }
+  }
+
 
 }

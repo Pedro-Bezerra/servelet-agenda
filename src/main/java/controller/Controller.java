@@ -12,7 +12,8 @@ import model.DAO;
 import model.JavaBeans;
 
 
-@WebServlet(urlPatterns = {"/ControllerServlet", "/main", "/adicionar", "/select", "/update"})
+@WebServlet(
+    urlPatterns = {"/ControllerServlet", "/main", "/adicionar", "/select", "/update", "/delete"})
 public class Controller extends HttpServlet {
   private static final long serialVersionUID = 1L;
   DAO dao = new DAO();
@@ -37,6 +38,8 @@ public class Controller extends HttpServlet {
       listarContato(request, response);
     } else if (action.equals("/update")) {
       editarContato(request, response);
+    } else if (action.equals("/delete")) {
+      excluirContato(request, response);
     } else {
       response.sendRedirect("index.html");
     }
@@ -90,4 +93,13 @@ public class Controller extends HttpServlet {
     dao.editarContato(contatoBeans);
     response.sendRedirect("main");
   }
+
+  protected void excluirContato(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    String idcon = request.getParameter("idcon");
+    contatoBeans.setIdcon(idcon);
+    dao.excluirContato(contatoBeans);
+    response.sendRedirect("main");
+  }
+
 }

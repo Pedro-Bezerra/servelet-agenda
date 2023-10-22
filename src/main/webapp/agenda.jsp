@@ -23,7 +23,7 @@
 				<td>Nome</td>
 				<td>Telefone</td>
 				<td>E-mail</td>
-				<td></td>
+				<td>Ações</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,10 +33,13 @@
 				<td><%= contato.getNome() %></td>
 				<td><%= contato.getFone() %></td>
 				<td><%= contato.getEmail() %></td>
-				<td><a href="select?idcon=<%=contato.getIdcon() %>" class="botao1">Editar</td>
+				<td><a href="select?idcon=<%=contato.getIdcon() %>" class="botao1">Editar</a>
+					<a href="javascript: confirmarExclusao(<%=contato.getIdcon() %>)" class="botao2">Excluir</a>
+				</td>
 			</tr>
 			<%} %>
 		</tbody>
 	</table>
+	<script src="scripts/confirmador.js"></script>
 </body>
 </html>
