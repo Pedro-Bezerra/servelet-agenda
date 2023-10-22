@@ -23,6 +23,7 @@
 				<td>Nome</td>
 				<td>Telefone</td>
 				<td>E-mail</td>
+				<td></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,6 +33,7 @@
 				<td><%= contato.getNome() %></td>
 				<td><%= contato.getFone() %></td>
 				<td><%= contato.getEmail() %></td>
+				<td><a href="select?idcon=<%=contato.getIdcon() %>" class="botao1">Editar</td>
 			</tr>
 			<%} %>
 		</tbody>

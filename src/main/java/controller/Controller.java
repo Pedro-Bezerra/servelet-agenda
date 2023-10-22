@@ -12,7 +12,7 @@ import model.DAO;
 import model.JavaBeans;
 
 
-@WebServlet(urlPatterns = {"/ControllerServlet", "/main", "/adicionar"})
+@WebServlet(urlPatterns = {"/ControllerServlet", "/main", "/adicionar", "/select", "/update"})
 public class Controller extends HttpServlet {
   private static final long serialVersionUID = 1L;
   DAO dao = new DAO();
@@ -30,19 +30,23 @@ public class Controller extends HttpServlet {
     response.getWriter().append("Served at: ").append(request.getContextPath());
     String action = request.getServletPath();
     if (action.equals("/main")) {
-      listarContatos(request, response);
+      listarTodosContatos(request, response);
     } else if (action.equals("/adicionar")) {
       inserirContato(request, response);
+    } else if (action.equals("/select")) {
+      listarContato(request, response);
+    } else if (action.equals("/update")) {
+      editarContato(request, response);
     } else {
       response.sendRedirect("index.html");
     }
   }
 
 
-  protected void listarContatos(HttpServletRequest request, HttpServletResponse response)
+  protected void listarTodosContatos(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    ArrayList<JavaBeans> contatos = dao.listarContatos();
+    ArrayList<JavaBeans> contatos = dao.listarTodosContatos();
 
     request.setAttribute("contatos", contatos);
     RequestDispatcher rd = request.getRequestDispatcher("agenda.jsp");
@@ -60,5 +64,30 @@ public class Controller extends HttpServlet {
     response.sendRedirect("main");
   }
 
+  protected void listarContato(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    String idcon = request.getParameter("idcon");
+    // System.out.println(idcon);
+    contatoBeans.setIdcon(idcon);
+    dao.selecionarContato(contatoBeans);
 
+    request.setAttribute("idcon", idcon);
+    request.setAttribute("nome", contatoBeans.getNome());
+    request.setAttribute("telefone", contatoBeans.getFone());
+    request.setAttribute("email", contatoBeans.getEmail());
+
+    RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
+    rd.forward(request, response);
+
+  }
+
+  protected void editarContato(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    contatoBeans.setIdcon(request.getParameter("idcon"));
+    contatoBeans.setNome(request.getParameter("nome"));
+    contatoBeans.setFone(request.getParameter("telefone"));
+    contatoBeans.setEmail(request.getParameter("email"));
+    dao.editarContato(contatoBeans);
+    response.sendRedirect("main");
+  }
 }
