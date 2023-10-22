@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,7 +30,7 @@ public class Controller extends HttpServlet {
     response.getWriter().append("Served at: ").append(request.getContextPath());
     String action = request.getServletPath();
     if (action.equals("/main")) {
-      mostrarContatos(request, response);
+      listarContatos(request, response);
     } else if (action.equals("/adicionar")) {
       inserirContato(request, response);
     } else {
@@ -37,9 +39,15 @@ public class Controller extends HttpServlet {
   }
 
 
-  protected void mostrarContatos(HttpServletRequest request, HttpServletResponse response)
+  protected void listarContatos(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    response.sendRedirect("agenda.jsp");
+
+    ArrayList<JavaBeans> contatos = dao.listarContatos();
+
+    request.setAttribute("contatos", contatos);
+    RequestDispatcher rd = request.getRequestDispatcher("agenda.jsp");
+    rd.forward(request, response);
+
   }
 
   protected void inserirContato(HttpServletRequest request, HttpServletResponse response)
